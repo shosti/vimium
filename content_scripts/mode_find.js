@@ -34,12 +34,11 @@ class SuppressPrintable extends Mode {
 //
 class PostFindMode extends SuppressPrintable {
   constructor() {
-    const element = document.activeElement;
     super({
       name: "post-find",
       // PostFindMode shares a singleton with focusInput; each displaces the other.
       singleton: "post-find-mode/focus-input",
-      exitOnBlur: element,
+      exitOnBlur: document.activeElement,
       exitOnClick: true,
       // Always truthy, so always continues bubbling.
       keydown(event) { return InsertMode.suppressEvent(event); },
@@ -48,6 +47,7 @@ class PostFindMode extends SuppressPrintable {
     });
 
     if (!document.activeElement || !DomUtils.isEditable(document.activeElement))
+      this.exit()
       return;
 
     // If the very-next keydown is Escape, then exit immediately, thereby passing subsequent keys to the
