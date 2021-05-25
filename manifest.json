@@ -91,5 +91,10 @@
     "pages/hud.html",
     "pages/help_dialog.html",
     "pages/completion_engines.html"
-  ]
+  ],
+  "applications": {
+    "gecko": {
+      "id": "vimium@eevans.co"
+    }
+  }
 }
